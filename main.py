@@ -56,9 +56,25 @@ class DocumentQARequest(BaseModel):
     
     @validator('documents')
     def validate_pdf_url(cls, v):
-        if not v.lower().endswith('.pdf'):
-            raise ValueError('Document URL must end with .pdf')
-        return v
+        # Parse URL to extract the path without query parameters
+        from urllib.parse import urlparse
+        
+        try:
+            parsed_url = urlparse(v)
+            # Get the path and check if it ends with .pdf
+            path = parsed_url.path.lower()
+            
+            if not path.endswith('.pdf'):
+                raise ValueError('Document URL must point to a PDF file (path must end with .pdf)')
+            
+            # Additional validation: ensure it's a valid URL
+            if not parsed_url.scheme in ['http', 'https']:
+                raise ValueError('Document URL must use http or https protocol')
+                
+            return v
+            
+        except Exception as e:
+            raise ValueError(f'Invalid document URL: {str(e)}')
     
     @validator('questions')
     def validate_questions(cls, v):
