@@ -3,7 +3,7 @@ uvicorn[standard]==0.27.0
 PyMuPDF==1.21.1               # ✅ Downgraded to avoid C++ build errors
 google-generativeai==0.3.2
 pydantic==2.5.3
-numpy==1.21.6
+numpy==1.22.0
 sentence-transformers==2.2.2
 requests==2.31.0
 python-multipart==0.0.7
@@ -11,3 +11,4 @@ python-dotenv==1.0.0
 torch==1.13.1
 transformers==4.30.2
 faiss-cpu==1.7.4              # ✅ Correct version of FAISS for CPU environments
+
