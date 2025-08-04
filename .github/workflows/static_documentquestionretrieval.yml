@@ -31,6 +31,10 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Install build tools (fix setuptools.build_meta error)
+        run: pip install --upgrade pip setuptools wheel build
+
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -68,4 +72,5 @@ jobs:
         with:
           app-name: 'documentquestionretrieval'
           slot-name: 'Production'
+
           
